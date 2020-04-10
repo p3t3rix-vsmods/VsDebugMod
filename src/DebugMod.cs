@@ -18,16 +18,18 @@ namespace DebugMod
             api.Server.Logger.EntryAdded += OnServerLogEntry;
         }
 
-        private void OnServerLogEntry(EnumLogType logType, string message, params object[] args)
-        {
-            if (logType == EnumLogType.VerboseDebug) return;
-            Debug.WriteLine("[Server " + logType + "] " + message, args);
-        }
-
         public override void StartClientSide(ICoreClientAPI api)
         {
             api.World.Logger.EntryAdded += OnClientLogEntry;
             api.RegisterCommand(new DebugTreeCommand(api));
+            api.RegisterCommand(new LangMatchDebugCommand(api));
+            api.RegisterCommand(new LangListDebugCommand(api));
+        }
+
+        private void OnServerLogEntry(EnumLogType logType, string message, params object[] args)
+        {
+            if (logType == EnumLogType.VerboseDebug) return;
+            Debug.WriteLine("[Server " + logType + "] " + message, args);
         }
 
         private void OnClientLogEntry(EnumLogType logType, string message, params object[] args)
