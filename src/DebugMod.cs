@@ -16,6 +16,7 @@ namespace DebugMod
         public override void StartServerSide(ICoreServerAPI api)
         {
             api.Server.Logger.EntryAdded += OnServerLogEntry;
+            api.RegisterCommand(new HungerDebugCommand(api));
         }
 
         public override void StartClientSide(ICoreClientAPI api)
