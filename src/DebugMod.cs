@@ -17,6 +17,7 @@ namespace DebugMod
         {
             api.Server.Logger.EntryAdded += OnServerLogEntry;
             api.RegisterCommand(new HungerDebugCommand(api));
+            api.RegisterCommand(new ModListServerCommand(api));
         }
 
         public override void StartClientSide(ICoreClientAPI api)
@@ -25,6 +26,7 @@ namespace DebugMod
             api.RegisterCommand(new DebugTreeCommand(api));
             api.RegisterCommand(new LangMatchDebugCommand(api));
             api.RegisterCommand(new LangListDebugCommand(api));
+            api.RegisterCommand(new ModListClientCommand(api));
         }
 
         private void OnServerLogEntry(EnumLogType logType, string message, params object[] args)
