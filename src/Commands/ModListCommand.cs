@@ -19,7 +19,9 @@ namespace DebugMod.Commands
         {
             foreach (var mod in _api.ModLoader.Mods)
             {
-                _api.SendMessage(player, GlobalConstants.InfoLogChatGroup, $"{mod.FileName}:{mod.SourcePath} ({mod.SourceType}) Systems:\n {string.Join("    \n", mod.Systems)}", EnumChatType.OwnMessage);
+                var systems = args.PopWord() == "systems" ? $" Systems:\n {string.Join("    \n", mod.Systems)}" : string.Empty;
+                var message = $"{mod.FileName}:{mod.SourcePath} ({mod.SourceType}) {systems}";
+                _api.SendMessage(player, GlobalConstants.InfoLogChatGroup, message, EnumChatType.OwnMessage);
             }
         }
     }
@@ -38,7 +40,10 @@ namespace DebugMod.Commands
         {
             foreach (var mod in _api.ModLoader.Mods)
             {
-                _api.ShowChatMessage($"{mod.FileName}:{mod.SourcePath} ({mod.SourceType}) Systems:\n{string.Join("    \n", mod.Systems)}");
+
+                var systems = args.PopWord() == "systems" ? $" Systems:\n {string.Join("    \n", mod.Systems)}" : string.Empty;
+                var message = $"{mod.FileName}:{mod.SourcePath} ({mod.SourceType}) {systems}";
+                _api.ShowChatMessage(message);
             }
         }
     }
